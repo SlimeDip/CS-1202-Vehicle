@@ -7,3 +7,5 @@ class Vehicle:
         self.maxfuel = maxfuel
         self.durability = durability
         self.fuel_type = fuel_type
+
+# testing part 2
