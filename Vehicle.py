@@ -8,5 +8,6 @@ class Vehicle:
         self.durability = durability
         self.fuel_type = fuel_type
 
+# helloo        
 # testing part 2
 # last testing, pag nakita nyo to, try nyo i delete kase testing lang to
