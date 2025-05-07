@@ -1,10 +1,10 @@
 # 🚗 Vehicle OOP 🚙
 
 ## 👥 Team Members:
-- Borillo, Benedict P. 🧑‍💻
-- Berana, Jon Paul S. 🧑‍💻
-- Urgelles, Jon Marc M. 🧑‍💻
-- Mortel, Nathaniel L. 🧑‍💻
+- Borillo, Benedict P.
+- Berana, Jon Paul S.
+- Urgelles, Jon Marc M.
+- Mortel, Nathaniel L.
 
 ---
 
