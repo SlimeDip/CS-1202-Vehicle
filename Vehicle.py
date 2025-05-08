@@ -5,7 +5,7 @@ class Vehicle(ABC):
         self._name = None
         self._speed = 0
         self._fuel = 0
-        self._max_fuel = 0
+        self._maxfuel = 0
         self._fuel_type = None
         # add nalang kayo ng mga attributes na gusto nyo
 
@@ -36,7 +36,16 @@ class Vehicle(ABC):
         if value < 0:
             raise ValueError("Fuel cannot be negative")
         self._fuel = value
-        self._max_fuel = value
+
+    @property
+    def max_fuel(self):
+        return self._maxfuel
+    
+    @max_fuel.setter
+    def max_fuel(self, value):
+        if value < 0:
+            raise ValueError("Max fuel cannot be negative")
+        self._maxfuel = value
 
     @property
     def fuel_type(self):
@@ -79,11 +88,10 @@ class Car(Vehicle):
             print("Cannot drive, fuel is empty")
             return
         self._fuel -= amount
-        print(f"Driving car, remaining fuel: {self._fuel}/{self._max_fuel}")
 
     def refuel(self):
-        self._fuel = self._max_fuel
-        print(f"Car refueled: {self._fuel}/{self._max_fuel}")
+        self._fuel = self.max_fuel
+        print(f"Car refueled: {self._fuel}/{self.max_fuel}")
 
 class Motorcycle(Vehicle):
     def start_engine(self):
@@ -97,11 +105,10 @@ class Motorcycle(Vehicle):
             print("Cannot drive, fuel is empty")
             return
         self._fuel -= amount
-        print(f"Driving motorcycle, remaining fuel: {self._fuel}/{self._max_fuel}")
 
     def refuel(self):
-        self._fuel = self._max_fuel
-        print(f"Motorcycle refueled: {self._fuel}/{self._max_fuel}")
+        self._fuel = self.max_fuel
+        print(f"Motorcycle refueled: {self._fuel}/{self.max_fuel}")
 
 def create_vehicle():
     print("Select vehicle type:")
@@ -118,33 +125,92 @@ def create_vehicle():
         return
     
     x.name = input("Enter vehicle name: ")
-    x.fuel = int(input("Enter vehicle fuel: "))
+    x.max_fuel = int(input("Enter vehicle fuel capacity: "))
+    x.fuel = x.max_fuel
     x.fuel_type = input("Enter vehicle fuel type: ")
     x.speed = int(input("Enter vehicle speed: "))
     Garage.append(x)
     print(f"{x.name} has been added to the garage.")
 
 def view_garage():
-    for i in Garage:
+    global CurrentVehicle
+    if not Garage:
+        print("Garage is empty.")
+        return
+    
+    for j, i in enumerate(Garage):
         print("-" * 20)
-        print(f"{i.name}")
+        print(f"{j+1}. {i.name}")
         print(f"Vehicle fuel: {i.fuel}L, Fuel type: {i.fuel_type}, Speed: {i.speed}km/h")
     print("-" * 20)
 
-Garage = []
+    choice = int(input("Select vehicle to drive (1, 2, ...): "))
+    if choice < 1 or choice > len(Garage):
+        print("Invalid choice.")
+        return
+    CurrentVehicle = Garage[choice - 1]
+
+def drive_sim():
+    global CurrentVehicle
+    if CurrentVehicle is None:
+        print("No vehicle selected.")
+        return
+    while True:
+        print(f"Current vehicle: {CurrentVehicle.name}")
+        print(f"Fuel: {CurrentVehicle.fuel}L/{CurrentVehicle.max_fuel}L, Speed: {CurrentVehicle.speed}km/h")
+        print("Select an action:")
+        print("1. Drive")
+        print("2. Refuel")
+        print("3. Stop Engine")
+        choice = input("Enter your choice: ")
+        print()
+        
+        if choice == "1":
+            distance = int(input("Enter distance to drive: "))
+            if distance > CurrentVehicle.fuel:
+                print("Not enough fuel to drive this distance.")
+                continue
+            CurrentVehicle.fuel -= distance
+        elif choice == "2":
+            CurrentVehicle.refuel()
+        elif choice == "3":
+            CurrentVehicle.stop_engine()
+            break
+        else:
+            print("Invalid choice, please try again.")
+        print()
+
+x = Car()
+x.name = "Default Car"
+x.fuel = 50
+x.max_fuel = 50
+x.fuel_type = "Gasoline"
+x.speed = 120
+
+Garage = [x]
+CurrentVehicle = Garage[0]
 
 if __name__ == "__main__":
     while True:
+        print(f"Current vehicle: {CurrentVehicle.name}")
+        print("Select an option:")
         print("1. Create Vehicle")
         print("2. View Garage")
-        print("3. Exit")
+        print("3. Drive Vehicle")
+        print("4. Exit")
         choice = input("Enter your choice: ")
+        print()
         
         if choice == "1":
             create_vehicle()
         elif choice == "2":
             view_garage()
         elif choice == "3":
+            drive_sim()
+        elif choice == "4":
+            print("Exiting program.")
             break
         else:
             print("Invalid choice, please try again.")
+
+        print()
