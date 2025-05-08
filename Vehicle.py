@@ -85,24 +85,35 @@ class Car(Vehicle):
         self._fuel = self._max_fuel
         print(f"Car refueled: {self._fuel}/{self._max_fuel}")
 
-if __name__ == "__main__":
-    Car1 = Car()
-    Car1.name = "Honda Civic"
-    Car1.fuel = 50
-    Car1.fuel_type = "gasoline"
-    Car1.speed = 60
+def create_vehicle():
+    x = Car()
+    x.name = input("Enter vehicle name: ")
+    x.fuel = int(input("Enter vehicle fuel: "))
+    x.fuel_type = input("Enter vehicle fuel type: ")
+    x.speed = int(input("Enter vehicle speed: "))
+    Garage.append(x)
 
-    Car2 = Car()
-    Car2.name = "Toyota Innova"
-    Car2.fuel = 30
-    Car2.fuel_type = "diesel"
-    Car2.speed = 80
-
-    Garage = [Car1, Car2]
-
-    for car in Garage:
+def view_garage():
+    for i in Garage:
         print("-" * 20)
-        print(f"{car.name}")
-        print(f"Car fuel: {car.fuel}, Fuel type: {car.fuel_type}, Speed: {car.speed}")
-    
+        print(f"{i.name}")
+        print(f"Car fuel: {i.fuel}, Fuel type: {i.fuel_type}, Speed: {i.speed}")
     print("-" * 20)
+
+Garage = []
+
+if __name__ == "__main__":
+    while True:
+        print("1. Create Vehicle")
+        print("2. View Garage")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            create_vehicle()
+        elif choice == "2":
+            view_garage()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice, please try again.")
