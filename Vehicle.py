@@ -85,6 +85,24 @@ class Car(Vehicle):
         self._fuel = self._max_fuel
         print(f"Car refueled: {self._fuel}/{self._max_fuel}")
 
+class Motorcycle(Vehicle):
+    def start_engine(self):
+        print("Motorcycle engine started")
+
+    def stop_engine(self):
+        print("Motorcycle engine stopped")
+
+    def drive(self, amount):
+        if self._fuel <= 0:
+            print("Cannot drive, fuel is empty")
+            return
+        self._fuel -= amount
+        print(f"Driving motorcycle, remaining fuel: {self._fuel}/{self._max_fuel}")
+
+    def refuel(self):
+        self._fuel = self._max_fuel
+        print(f"Motorcycle refueled: {self._fuel}/{self._max_fuel}")
+
 def create_vehicle():
     x = Car()
     x.name = input("Enter vehicle name: ")
