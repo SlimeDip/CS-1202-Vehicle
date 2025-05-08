@@ -44,7 +44,7 @@ class Vehicle(ABC):
     
     @fuel_type.setter
     def fuel_type(self, value):
-        if value not in ["gasoline", "diesel", "electric"]:
+        if value.lower() not in ["gasoline", "diesel", "electric"]:
             raise ValueError("Invalid fuel type")
         self._fuel_type = value
 
@@ -104,12 +104,25 @@ class Motorcycle(Vehicle):
         print(f"Motorcycle refueled: {self._fuel}/{self._max_fuel}")
 
 def create_vehicle():
-    x = Car()
+    print("Select vehicle type:")
+    print("1. Car")
+    print("2. Motorcycle")
+    vehicle_type = input("Enter your choice: ")
+
+    if vehicle_type == "1":
+        x = Car()
+    elif vehicle_type == "2":
+        x = Motorcycle()
+    else:
+        print("Invalid choice, returning to menu.")
+        return
+    
     x.name = input("Enter vehicle name: ")
     x.fuel = int(input("Enter vehicle fuel: "))
     x.fuel_type = input("Enter vehicle fuel type: ")
     x.speed = int(input("Enter vehicle speed: "))
     Garage.append(x)
+    print(f"{x.name} has been added to the garage.")
 
 def view_garage():
     for i in Garage:
