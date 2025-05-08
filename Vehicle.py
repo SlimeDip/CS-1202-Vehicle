@@ -128,7 +128,7 @@ def view_garage():
     for i in Garage:
         print("-" * 20)
         print(f"{i.name}")
-        print(f"Car fuel: {i.fuel}, Fuel type: {i.fuel_type}, Speed: {i.speed}")
+        print(f"Vehicle fuel: {i.fuel}L, Fuel type: {i.fuel_type}, Speed: {i.speed}km/h")
     print("-" * 20)
 
 Garage = []
