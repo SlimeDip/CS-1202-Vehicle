@@ -96,7 +96,7 @@ class Car(Vehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Car refueled: {self._fuel}/{self.max_fuel}")
+        print(f"Car refueled: {self._fuel} L / {self.max_fuel} L")
 
 class Motorcycle(Vehicle):
     def start_engine(self):
@@ -113,7 +113,7 @@ class Motorcycle(Vehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Motorcycle refueled: {self._fuel}/{self.max_fuel}")
+        print(f"Motorcycle refueled: {self._fuel} L / {self.max_fuel} L")
 
 class Bus(Vehicle):
     def start_engine(self):
@@ -130,7 +130,7 @@ class Bus(Vehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Bus refueled: {self._fuel}/{self.max_fuel}")
+        print(f"Bus refueled: {self._fuel} L / {self.max_fuel} L")
 
 def create_vehicle():
     print("Select vehicle type:")
@@ -169,7 +169,7 @@ def view_garage():
         print("-" * 20)
         print(f"{j+1}. {i.name}")
         print(f"Vehicle type: {type(i).__name__}")
-        print(f"Vehicle fuel: {i.fuel} L, Fuel type: {i.fuel_type}, Speed: {i.speed} km/h")
+        print(f"Vehicle fuel: {i.fuel} L | Fuel type: {i.fuel_type} | Speed: {i.speed} km/h")
     print("-" * 20)
 
     try:
@@ -223,7 +223,7 @@ def drive_sim():
         print()
 
 x = Car()
-x.name = "Default Car"
+x.name = "Family Car"
 x.fuel = 50
 x.max_fuel = 50
 x.fuel_type = "Gasoline"
