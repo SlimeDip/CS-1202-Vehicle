@@ -238,11 +238,12 @@ def create_vehicle():
         x.max_fuel = int(input("Enter vehicle fuel capacity (Liter): "))
         x.fuel = x.max_fuel
         x.fuel_type = input("Enter vehicle fuel type (Gasoline, Diesel, Electric): ")
-        x.speed = int(input("Enter vehicle speed (km/h): "))
         if isinstance(x, LandVehicle):
+            x.speed = int(input("Enter vehicle speed (km/h): "))
             Garage.append(x)
             print(f"\n{x.name} has been added to the garage.")
         elif isinstance(x, WaterVehicle):
+            x.speed = int(input("Enter vehicle speed (knots): ")) / 0.539957  # Convert knots to km/h
             Dock.append(x)
             print(f"\n{x.name} has been added to the dock.")
     except ValueError:
@@ -363,6 +364,46 @@ x.max_fuel = 50
 x.fuel_type = "Gasoline"
 x.speed = 120
 Garage.append(x)
+
+y = Motorcycle()
+y.name = "Sport Bike"
+y.fuel = 15
+y.max_fuel = 15
+y.fuel_type = "Gasoline"
+y.speed = 180
+Garage.append(y)
+
+z = Bus()
+z.name = "City Bus"
+z.fuel = 200
+z.max_fuel = 200
+z.fuel_type = "Diesel"
+z.speed = 80
+Garage.append(z)
+
+w = Truck()
+w.name = "Freight Truck"
+w.fuel = 300
+w.max_fuel = 300
+w.fuel_type = "Diesel"
+w.speed = 100
+Garage.append(w)
+
+a = Speedboat()
+a.name = "Speedy"
+a.fuel = 100
+a.max_fuel = 100
+a.fuel_type = "Gasoline"
+a.speed = 40 / 0.539957  # Convert knots to km/h
+Dock.append(a)
+
+b = Jetski()
+b.name = "Wave Rider"
+b.fuel = 50
+b.max_fuel = 50
+b.fuel_type = "Gasoline"
+b.speed = 60 / 0.539957  # Convert knots to km/h
+Dock.append(b)
 
 CurrentVehicle = Garage[0]
 
