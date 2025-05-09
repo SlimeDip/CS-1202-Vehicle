@@ -93,7 +93,7 @@ class WaterVehicle(Vehicle):
 
     @property
     def speed(self):
-        return self._speed * 0.539957  # Convert km/h to knots
+        return self._speed * 0.539957
 
     @speed.setter
     def speed(self, value):
@@ -186,7 +186,7 @@ class Speedboat(WaterVehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Speedboat refueled: {self._fuel}L / {self.max_fuel}L")
+        print(f"Speedboat refueled: {self._fuel}L / {self._maxfuel}L")
 
 class Jetski(WaterVehicle):
     def start_engine(self):
@@ -203,7 +203,7 @@ class Jetski(WaterVehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Jetski refueled: {self._fuel}L / {self.max_fuel}L")
+        print(f"Jetski refueled: {self._fuel}L / {self._maxfuel}L")
 
 def create_vehicle():
     print("Select vehicle type:")
@@ -243,7 +243,7 @@ def create_vehicle():
             Garage.append(x)
             print(f"\n{x.name} has been added to the garage.")
         elif isinstance(x, WaterVehicle):
-            x.speed = int(input("Enter vehicle speed (knots): ")) / 0.539957  # Convert knots to km/h
+            x.speed = int(input("Enter vehicle speed (knots): ")) / 0.539957
             Dock.append(x)
             print(f"\n{x.name} has been added to the dock.")
     except ValueError:
@@ -304,8 +304,14 @@ def view_dock():
 def drive_sim():
     global CurrentVehicle
     while True:
-        print(f"Current vehicle: {CurrentVehicle.name}")
-        print(f"Fuel: {CurrentVehicle.fuel}L / {CurrentVehicle.max_fuel}L, Speed: {CurrentVehicle.speed} km/h\n")
+        if isinstance(CurrentVehicle, WaterVehicle):
+            speed_in_knots = round(CurrentVehicle.speed, 2)
+            print(f"Current vehicle: {CurrentVehicle.name}")
+            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {speed_in_knots:.2f} kn\n")
+        else:
+            print(f"Current vehicle: {CurrentVehicle.name}")
+            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {round(CurrentVehicle.speed, 2)} km/h\n")
+
         print("Select an action:")
         print("1. Drive")
         print("2. Refuel")
@@ -315,20 +321,39 @@ def drive_sim():
         
         if choice == "1":
             clear()
-            distance = int(input("Enter distance to drive: "))
-            if distance > CurrentVehicle.fuel:
-                print("Not enough fuel to drive this distance.")
-                time.sleep(1)
-                clear()
-                continue
-            CurrentVehicle.fuel -= distance
-            print(f"Driving {distance} km")
-            print("Driving", end=" ", flush=True)
-            for _ in range(4):
-                print(".", end=" ", flush=True)
-                time.sleep(1)
-            print(f"\nYou traveled {distance} km in {distance / CurrentVehicle.speed:.2f} hours.")
-            print(f"\nArrived at destination!")
+            if isinstance(CurrentVehicle, WaterVehicle):
+                distance_in_knots = float(input("Enter distance to drive (in nautical miles): "))
+                distance_in_km = distance_in_knots / 0.539957
+                if distance_in_km > CurrentVehicle.fuel:
+                    print("Not enough fuel to drive this distance.")
+                    time.sleep(1)
+                    clear()
+                    continue
+                CurrentVehicle.fuel -= distance_in_km
+                CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
+                print(f"Driving {distance_in_knots:.2f} nautical miles")
+                print("Driving", end=" ", flush=True)
+                for _ in range(4):
+                    print(".", end=" ", flush=True)
+                    time.sleep(1)
+                print(f"\nYou traveled {distance_in_knots:.2f} nautical miles in {distance_in_knots / speed_in_knots:.2f} hours.")
+                print(f"\nArrived at destination!")
+            else:
+                distance = float(input("Enter distance to drive (in km): "))
+                if distance > CurrentVehicle.fuel:
+                    print("Not enough fuel to drive this distance.")
+                    time.sleep(1)
+                    clear()
+                    continue
+                CurrentVehicle.fuel -= distance
+                CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
+                print(f"Driving {distance:.2f} km")
+                print("Driving", end=" ", flush=True)
+                for _ in range(4):
+                    print(".", end=" ", flush=True)
+                    time.sleep(1)
+                print(f"\nYou traveled {distance:.2f} km in {distance / round(CurrentVehicle.speed, 2):.2f} hours.")
+                print(f"\nArrived at destination!")
             time.sleep(5)
             clear()
         elif choice == "2":
@@ -339,6 +364,7 @@ def drive_sim():
                 time.sleep(1)
             print("\n", end="")
             CurrentVehicle.refuel()
+            CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
             time.sleep(1)
             clear()
         elif choice == "3":
@@ -354,8 +380,8 @@ def drive_sim():
 
 clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 
-Garage = []  # For LandVehicles
-Dock = []    # For WaterVehicles
+Garage = []
+Dock = []
 
 x = Car()
 x.name = "Family Car"
@@ -394,7 +420,7 @@ a.name = "Speedy"
 a.fuel = 100
 a.max_fuel = 100
 a.fuel_type = "Gasoline"
-a.speed = 40 / 0.539957  # Convert knots to km/h
+a.speed = 40 / 0.539957
 Dock.append(a)
 
 b = Jetski()
@@ -402,7 +428,7 @@ b.name = "Wave Rider"
 b.fuel = 50
 b.max_fuel = 50
 b.fuel_type = "Gasoline"
-b.speed = 60 / 0.539957  # Convert knots to km/h
+b.speed = 60 / 0.539957
 Dock.append(b)
 
 CurrentVehicle = Garage[0]
