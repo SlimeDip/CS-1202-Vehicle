@@ -28,6 +28,8 @@ This program uses an abstract base class (`Vehicle`) and subclasses (`Car`, `Mot
 - **Abstraction**: Defining a blueprint for vehicles with abstract methods.
 - **Polymorphism**: Allowing different vehicle types to implement their own behavior for shared methods.
 
+**Class Diagram**
+![Class Diagram]("Class Diagram.png")
 ---
 
 ## ▶️ How to run the program?
