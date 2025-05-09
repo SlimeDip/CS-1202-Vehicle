@@ -97,7 +97,7 @@ class Car(Vehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Car refueled: {self._fuel} L / {self.max_fuel} L")
+        print(f"Car refueled: {self._fuel}L / {self.max_fuel}L")
 
 class Motorcycle(Vehicle):
     def start_engine(self):
@@ -114,7 +114,7 @@ class Motorcycle(Vehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Motorcycle refueled: {self._fuel} L / {self.max_fuel} L")
+        print(f"Motorcycle refueled: {self._fuel}L / {self.max_fuel}L")
 
 class Bus(Vehicle):
     def start_engine(self):
@@ -131,7 +131,7 @@ class Bus(Vehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Bus refueled: {self._fuel} L / {self.max_fuel} L")
+        print(f"Bus refueled: {self._fuel}L / {self.max_fuel}L")
 
 def create_vehicle():
     print("Select vehicle type:")
@@ -254,7 +254,6 @@ CurrentVehicle = Garage[0]
 
 if __name__ == "__main__":
     clear()
-    print("Welcome to the Vehicle Management System!")
     while True:
         print(f"Current vehicle: {CurrentVehicle.name}\n")
         print("Select an option:")
