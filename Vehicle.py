@@ -7,7 +7,7 @@ class Vehicle(ABC):
         self._name = None
         self._speed = 0
         self._fuel = 0
-        self._maxfuel = 0
+        self._max_fuel = 0
         self._fuel_type = None
 
     @property
@@ -44,14 +44,14 @@ class Vehicle(ABC):
 
     @property
     def max_fuel(self):
-        return self._maxfuel
+        return self._max_fuel
     
     @max_fuel.setter
     def max_fuel(self, value):
         if value <= 0:
-            self._maxfuel = 60
+            self._max_fuel = 60
             print("Max fuel cannot be negative, setting to default value of 60L.")
-        self._maxfuel = value
+        self._max_fuel = value
 
     @property
     def fuel_type(self):
@@ -186,7 +186,7 @@ class Speedboat(WaterVehicle):
 
     def refuel(self):
         self._fuel = self.max_fuel
-        print(f"Speedboat refueled: {self._fuel}L / {self._maxfuel}L")
+        print(f"Speedboat refueled: {self._fuel}L / {self._max_fuel}L")
 
 class Jetski(WaterVehicle):
     def start_engine(self):
@@ -323,19 +323,14 @@ def drive_sim():
             clear()
             if isinstance(CurrentVehicle, WaterVehicle):
                 distance_in_knots = float(input("Enter distance to drive (in nautical miles): "))
+                if distance_in_knots <= 0:
+                    print("Distance must be greater than 0.")
+                    time.sleep(1)
+                    clear()
+                    continue
                 distance_in_km = distance_in_knots / 0.539957
-                if distance_in_knots > CurrentVehicle.fuel:
+                if distance_in_km > CurrentVehicle.fuel:
                     print("Not enough fuel to drive this distance.")
-                    time.sleep(1)
-                    clear()
-                    continue
-                if isinstance(CurrentVehicle, WaterVehicle) and distance_in_knots <= 0:
-                    print("Distance must be greater than 0.")
-                    time.sleep(1)
-                    clear()
-                    continue
-                elif isinstance(CurrentVehicle, LandVehicle) and distance_in_km <= 0:
-                    print("Distance must be greater than 0.")
                     time.sleep(1)
                     clear()
                     continue
@@ -346,10 +341,15 @@ def drive_sim():
                 for _ in range(3):
                     print(".", end=" ", flush=True)
                     time.sleep(1)
-                print(f"\nYou traveled {distance_in_knots:.2f} nautical miles in {distance_in_knots / speed_in_knots:.2f} hours.")
+                print(f"\nYou traveled {distance_in_knots:.2f} nautical miles in {distance_in_knots / round(CurrentVehicle.speed, 2):.2f} hours.")
                 print(f"\nArrived at destination!")
-            else:
+            elif isinstance(CurrentVehicle, LandVehicle):
                 distance = float(input("Enter distance to drive (in km): "))
+                if distance <= 0:
+                    print("Distance must be greater than 0.")
+                    time.sleep(1)
+                    clear()
+                    continue
                 if distance > CurrentVehicle.fuel:
                     print("Not enough fuel to drive this distance.")
                     time.sleep(1)
