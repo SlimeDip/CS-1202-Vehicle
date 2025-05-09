@@ -155,6 +155,7 @@ def create_vehicle():
     print("1. Car")
     print("2. Motorcycle")
     print("3. Bus")
+    print("4. Truck")
     vehicle_type = input("Enter your choice: ")
 
     if vehicle_type == "1":
@@ -163,6 +164,8 @@ def create_vehicle():
         x = Motorcycle()
     elif vehicle_type == "3":
         x = Bus()
+    elif vehicle_type == "4":
+        x = Truck()
     else:
         print("Invalid choice, returning to menu.")
         time.sleep(1)
