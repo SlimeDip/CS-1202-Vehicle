@@ -110,16 +110,36 @@ class Motorcycle(Vehicle):
         self._fuel = self.max_fuel
         print(f"Motorcycle refueled: {self._fuel}/{self.max_fuel}")
 
+class Bus(Vehicle):
+    def start_engine(self):
+        print("Bus engine started")
+
+    def stop_engine(self):
+        print("Bus engine stopped")
+
+    def drive(self, amount):
+        if self._fuel <= 0:
+            print("Cannot drive, fuel is empty")
+            return
+        self._fuel -= amount
+
+    def refuel(self):
+        self._fuel = self.max_fuel
+        print(f"Bus refueled: {self._fuel}/{self.max_fuel}")
+
 def create_vehicle():
     print("Select vehicle type:")
     print("1. Car")
     print("2. Motorcycle")
+    print("3. Bus")
     vehicle_type = input("Enter your choice: ")
 
     if vehicle_type == "1":
         x = Car()
     elif vehicle_type == "2":
         x = Motorcycle()
+    elif vehicle_type == "3":
+        x = Bus()
     else:
         print("Invalid choice, returning to menu.")
         return
