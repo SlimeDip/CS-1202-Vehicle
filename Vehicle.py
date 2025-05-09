@@ -133,6 +133,23 @@ class Bus(Vehicle):
         self._fuel = self.max_fuel
         print(f"Bus refueled: {self._fuel}L / {self.max_fuel}L")
 
+class Truck(Vehicle):
+    def start_engine(self):
+        print("Truck engine started")
+
+    def stop_engine(self):
+        print("Truck engine stopped")
+
+    def drive(self, amount):
+        if self._fuel <= 0:
+            print("Cannot drive, fuel is empty")
+            return
+        self._fuel -= amount
+
+    def refuel(self):
+        self._fuel = self.max_fuel
+        print(f"Bus refueled: {self._fuel}L / {self.max_fuel}L")
+
 def create_vehicle():
     print("Select vehicle type:")
     print("1. Car")
