@@ -48,10 +48,11 @@ class Vehicle(ABC):
     
     @max_fuel.setter
     def max_fuel(self, value):
-        if value <= 0:
+        if value < 0:
             self._max_fuel = 60
             print("Max fuel cannot be negative, setting to default value of 60L.")
-        self._max_fuel = value
+        else:
+            self._max_fuel = value
 
     @property
     def fuel_type(self):
@@ -97,8 +98,8 @@ class WaterVehicle(Vehicle):
 
     @speed.setter
     def speed(self, value):
-        if value < 0:
-            self._speed = 60
+        if value <= 0:
+            self._speed = 60 / 0.539957
             print("Speed cannot be negative, setting to default value of 60 knots")
         else:
             self._speed = value
