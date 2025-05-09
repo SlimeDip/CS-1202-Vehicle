@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import time
+import os
 
 class Vehicle(ABC):
     def __init__(self):
@@ -147,6 +148,8 @@ def create_vehicle():
         x = Bus()
     else:
         print("Invalid choice, returning to menu.")
+        time.sleep(1)
+        clear()
         return
     
     try:
@@ -156,9 +159,11 @@ def create_vehicle():
         x.fuel_type = input("Enter vehicle fuel type (Gasoline, Diesel, Electric): ")
         x.speed = int(input("Enter vehicle speed (km/h): "))
         Garage.append(x)
-        print(f"{x.name} has been added to the garage.")
+        print(f"\n{x.name} has been added to the garage.")
     except ValueError:
         print("Invalid input, please enter numeric values for fuel and speed.")
+        time.sleep(1)
+        clear()
 
 def view_garage():
     global CurrentVehicle
@@ -176,16 +181,20 @@ def view_garage():
         choice = int(input("\nSelect vehicle to drive (1, 2, ...): "))
         if choice < 1 or choice > len(Garage):
             print("Invalid choice.")
+            time.sleep(1)
+            clear()
             return
         CurrentVehicle = Garage[choice - 1]
     except ValueError:
         print("Invalid input, please enter a number.")
+        time.sleep(1)
+        clear()
 
 def drive_sim():
     global CurrentVehicle
     while True:
         print(f"Current vehicle: {CurrentVehicle.name}")
-        print(f"Fuel: {CurrentVehicle.fuel}L / {CurrentVehicle.max_fuel}L, Speed: {CurrentVehicle.speed} km/h")
+        print(f"Fuel: {CurrentVehicle.fuel}L / {CurrentVehicle.max_fuel}L, Speed: {CurrentVehicle.speed} km/h\n")
         print("Select an action:")
         print("1. Drive")
         print("2. Refuel")
@@ -194,9 +203,12 @@ def drive_sim():
         print()
         
         if choice == "1":
+            clear()
             distance = int(input("Enter distance to drive: "))
             if distance > CurrentVehicle.fuel:
                 print("Not enough fuel to drive this distance.")
+                time.sleep(1)
+                clear()
                 continue
             CurrentVehicle.fuel -= distance
             print(f"Driving {distance} km")
@@ -206,7 +218,9 @@ def drive_sim():
                 time.sleep(1)
             print(f"\nArrived at destination!")
             time.sleep(1)
+            clear()
         elif choice == "2":
+            clear()
             print("Refueling", end=" ", flush=True)
             for _ in range(4):
                 print(".", end=" ", flush=True)
@@ -214,13 +228,19 @@ def drive_sim():
             print("\n", end="")
             CurrentVehicle.refuel()
             time.sleep(1)
+            clear()
         elif choice == "3":
+            clear()
             CurrentVehicle.stop_engine()
             time.sleep(1)
+            clear()
             break
         else:
             print("Invalid choice, please try again.")
-        print()
+            time.sleep(1)
+            clear()
+
+clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 
 x = Car()
 x.name = "Family Car"
@@ -233,21 +253,28 @@ Garage = [x]
 CurrentVehicle = Garage[0]
 
 if __name__ == "__main__":
+    clear()
+    print("Welcome to the Vehicle Management System!")
     while True:
-        print(f"Current vehicle: {CurrentVehicle.name}")
+        print(f"Current vehicle: {CurrentVehicle.name}\n")
         print("Select an option:")
         print("1. Create Vehicle")
         print("2. View Garage")
         print("3. Drive Vehicle")
         print("4. Exit")
         choice = input("Enter your choice: ")
-        print()
         
         if choice == "1":
+            clear()
             create_vehicle()
+            time.sleep(1)
+            clear()
         elif choice == "2":
+            clear()
             view_garage()
+            clear()
         elif choice == "3":
+            clear()
             print("Starting engine", end=" ", flush=True)
             for _ in range(4):
                 print(".", end=" ", flush=True)
@@ -255,12 +282,14 @@ if __name__ == "__main__":
             print("\n", end="")
             CurrentVehicle.start_engine()
             print()
-            time.sleep(0.5)
+            time.sleep(1)
+            clear()
             drive_sim()
+            clear()
         elif choice == "4":
             print("Exiting program.")
             break
         else:
             print("Invalid choice, please try again.")
-
-        print()
+            time.sleep(1)
+            clear()
