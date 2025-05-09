@@ -24,7 +24,7 @@ class Vehicle(ABC):
     
     @speed.setter
     def speed(self, value):
-        if value < 0:
+        if value <= 0:
             self._speed = 60
             print("Speed cannot be negative, setting to default value of 60 km/h.")
         else:
@@ -36,7 +36,7 @@ class Vehicle(ABC):
     
     @fuel.setter
     def fuel(self, value):
-        if value < 0:
+        if value <= 0:
             self._fuel = 60
             print("Fuel cannot be negative, setting to default value of 60L.")
         else:
@@ -48,7 +48,7 @@ class Vehicle(ABC):
     
     @max_fuel.setter
     def max_fuel(self, value):
-        if value < 0:
+        if value <= 0:
             self._maxfuel = 60
             print("Max fuel cannot be negative, setting to default value of 60L.")
         self._maxfuel = value
@@ -99,7 +99,7 @@ class WaterVehicle(Vehicle):
     def speed(self, value):
         if value < 0:
             self._speed = 60
-            print("Speed cannot be negative, setting to default value of 60 km/h.")
+            print("Speed cannot be negative, setting to default value of 60 knots")
         else:
             self._speed = value
 
@@ -307,10 +307,10 @@ def drive_sim():
         if isinstance(CurrentVehicle, WaterVehicle):
             speed_in_knots = round(CurrentVehicle.speed, 2)
             print(f"Current vehicle: {CurrentVehicle.name}")
-            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {speed_in_knots:.2f} kn\n")
+            print(f"Fuel: {round(CurrentVehicle._fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {speed_in_knots:.2f} kn\n")
         else:
             print(f"Current vehicle: {CurrentVehicle.name}")
-            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle._maxfuel, 2)}L, Speed: {round(CurrentVehicle.speed, 2)} km/h\n")
+            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {round(CurrentVehicle.speed, 2)} km/h\n")
 
         print("Select an action:")
         print("1. Drive")
@@ -324,8 +324,18 @@ def drive_sim():
             if isinstance(CurrentVehicle, WaterVehicle):
                 distance_in_knots = float(input("Enter distance to drive (in nautical miles): "))
                 distance_in_km = distance_in_knots / 0.539957
-                if distance_in_km > CurrentVehicle.fuel:
+                if distance_in_knots > CurrentVehicle.fuel:
                     print("Not enough fuel to drive this distance.")
+                    time.sleep(1)
+                    clear()
+                    continue
+                if isinstance(CurrentVehicle, WaterVehicle) and distance_in_knots <= 0:
+                    print("Distance must be greater than 0.")
+                    time.sleep(1)
+                    clear()
+                    continue
+                elif isinstance(CurrentVehicle, LandVehicle) and distance_in_km <= 0:
+                    print("Distance must be greater than 0.")
                     time.sleep(1)
                     clear()
                     continue
@@ -333,7 +343,7 @@ def drive_sim():
                 CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
                 print(f"Driving {distance_in_knots:.2f} nautical miles")
                 print("Driving", end=" ", flush=True)
-                for _ in range(4):
+                for _ in range(3):
                     print(".", end=" ", flush=True)
                     time.sleep(1)
                 print(f"\nYou traveled {distance_in_knots:.2f} nautical miles in {distance_in_knots / speed_in_knots:.2f} hours.")
@@ -349,17 +359,17 @@ def drive_sim():
                 CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
                 print(f"Driving {distance:.2f} km")
                 print("Driving", end=" ", flush=True)
-                for _ in range(4):
+                for _ in range(3):
                     print(".", end=" ", flush=True)
                     time.sleep(1)
                 print(f"\nYou traveled {distance:.2f} km in {distance / round(CurrentVehicle.speed, 2):.2f} hours.")
                 print(f"\nArrived at destination!")
-            time.sleep(5)
+            time.sleep(3)
             clear()
         elif choice == "2":
             clear()
             print("Refueling", end=" ", flush=True)
-            for _ in range(4):
+            for _ in range(3):
                 print(".", end=" ", flush=True)
                 time.sleep(1)
             print("\n", end="")
@@ -461,7 +471,7 @@ if __name__ == "__main__":
         elif choice == "4":
             clear()
             print("Starting engine", end=" ", flush=True)
-            for _ in range(4):
+            for _ in range(3):
                 print(".", end=" ", flush=True)
                 time.sleep(1)
             print("\n", end="")
