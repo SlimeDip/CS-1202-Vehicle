@@ -82,7 +82,6 @@ class Vehicle(ABC):
         pass
 
 class Car(Vehicle):
-
     def start_engine(self):
         print("Car engine started")
 
@@ -236,8 +235,9 @@ def drive_sim():
             for _ in range(4):
                 print(".", end=" ", flush=True)
                 time.sleep(1)
+            print(f"\nYou traveled {distance} km in {distance / CurrentVehicle.speed:.2f} hours.")
             print(f"\nArrived at destination!")
-            time.sleep(1)
+            time.sleep(5)
             clear()
         elif choice == "2":
             clear()
