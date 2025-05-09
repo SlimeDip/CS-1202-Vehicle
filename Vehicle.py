@@ -310,7 +310,7 @@ def drive_sim():
             print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {speed_in_knots:.2f} kn\n")
         else:
             print(f"Current vehicle: {CurrentVehicle.name}")
-            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {round(CurrentVehicle.speed, 2)} km/h\n")
+            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle._maxfuel, 2)}L, Speed: {round(CurrentVehicle.speed, 2)} km/h\n")
 
         print("Select an action:")
         print("1. Drive")
@@ -383,53 +383,53 @@ clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 Garage = []
 Dock = []
 
-x = Car()
-x.name = "Family Car"
-x.fuel = 50
-x.max_fuel = 50
-x.fuel_type = "Gasoline"
-x.speed = 120
-Garage.append(x)
+car = Car()
+car.name = "Family Car"
+car.fuel = 50
+car.max_fuel = 50
+car.fuel_type = "Gasoline"
+car.speed = 120
+Garage.append(car)
 
-y = Motorcycle()
-y.name = "Sport Bike"
-y.fuel = 15
-y.max_fuel = 15
-y.fuel_type = "Gasoline"
-y.speed = 180
-Garage.append(y)
+motorcycle = Motorcycle()
+motorcycle.name = "Sport Bike"
+motorcycle.fuel = 15
+motorcycle.max_fuel = 15
+motorcycle.fuel_type = "Gasoline"
+motorcycle.speed = 180
+Garage.append(motorcycle)
 
-z = Bus()
-z.name = "City Bus"
-z.fuel = 200
-z.max_fuel = 200
-z.fuel_type = "Diesel"
-z.speed = 80
-Garage.append(z)
+bus = Bus()
+bus.name = "City Bus"
+bus.fuel = 200
+bus.max_fuel = 200
+bus.fuel_type = "Diesel"
+bus.speed = 80
+Garage.append(bus)
 
-w = Truck()
-w.name = "Freight Truck"
-w.fuel = 300
-w.max_fuel = 300
-w.fuel_type = "Diesel"
-w.speed = 100
-Garage.append(w)
+truck = Truck()
+truck.name = "Freight Truck"
+truck.fuel = 300
+truck.max_fuel = 300
+truck.fuel_type = "Diesel"
+truck.speed = 100
+Garage.append(truck)
 
-a = Speedboat()
-a.name = "Speedy"
-a.fuel = 100
-a.max_fuel = 100
-a.fuel_type = "Gasoline"
-a.speed = 40 / 0.539957
-Dock.append(a)
+boat = Speedboat()
+boat.name = "Speedy"
+boat.fuel = 100
+boat.max_fuel = 100
+boat.fuel_type = "Gasoline"
+boat.speed = 40 / 0.539957
+Dock.append(boat)
 
-b = Jetski()
-b.name = "Wave Rider"
-b.fuel = 50
-b.max_fuel = 50
-b.fuel_type = "Gasoline"
-b.speed = 60 / 0.539957
-Dock.append(b)
+jetski = Jetski()
+jetski.name = "Wave Rider"
+jetski.fuel = 50
+jetski.max_fuel = 50
+jetski.fuel_type = "Gasoline"
+jetski.speed = 60 / 0.539957
+Dock.append(jetski)
 
 CurrentVehicle = Garage[0]
 
