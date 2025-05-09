@@ -29,7 +29,7 @@ This program uses an abstract base class (`Vehicle`) and subclasses (`Car`, `Mot
 - **Polymorphism**: Allowing different vehicle types to implement their own behavior for shared methods.
 
 **Class Diagram**
-![Class Diagram]("Class Diagram.png")
+![Class Diagram](Class%20Diagram.png)
 ---
 
 ## ▶️ How to run the program?
