@@ -7,7 +7,6 @@ class Vehicle(ABC):
         self._fuel = 0
         self._maxfuel = 0
         self._fuel_type = None
-        # add nalang kayo ng mga attributes na gusto nyo
 
     @property
     def name(self):
@@ -24,8 +23,10 @@ class Vehicle(ABC):
     @speed.setter
     def speed(self, value):
         if value < 0:
-            raise ValueError("Speed cannot be negative")
-        self._speed = value
+            self._speed = 60
+            print("Speed cannot be negative, setting to default value of 60 km/h")
+        else:
+            self._speed = value
 
     @property
     def fuel(self):
@@ -34,8 +35,10 @@ class Vehicle(ABC):
     @fuel.setter
     def fuel(self, value):
         if value < 0:
-            raise ValueError("Fuel cannot be negative")
-        self._fuel = value
+            self._fuel = 60
+            print("Fuel cannot be negative, setting to default value of 60L")
+        else:
+            self._fuel = value
 
     @property
     def max_fuel(self):
@@ -44,7 +47,8 @@ class Vehicle(ABC):
     @max_fuel.setter
     def max_fuel(self, value):
         if value < 0:
-            raise ValueError("Max fuel cannot be negative")
+            self._maxfuel = 60
+            print("Max fuel cannot be negative, setting to default value of 60L")
         self._maxfuel = value
 
     @property
@@ -54,8 +58,10 @@ class Vehicle(ABC):
     @fuel_type.setter
     def fuel_type(self, value):
         if value.lower() not in ["gasoline", "diesel", "electric"]:
-            raise ValueError("Invalid fuel type")
-        self._fuel_type = value
+            self._fuel_type = "Gasoline"
+            print("Invalid fuel type, setting to default value of Gasoline")
+        else:
+            self._fuel_type = value
 
     @abstractmethod
     def start_engine(self):
@@ -72,8 +78,6 @@ class Vehicle(ABC):
     @abstractmethod
     def refuel(self, amount):
         pass
-
-    # add nalang kayo ng mga methods na gusto nyo
 
 class Car(Vehicle):
 
@@ -144,13 +148,16 @@ def create_vehicle():
         print("Invalid choice, returning to menu.")
         return
     
-    x.name = input("Enter vehicle name: ")
-    x.max_fuel = int(input("Enter vehicle fuel capacity: "))
-    x.fuel = x.max_fuel
-    x.fuel_type = input("Enter vehicle fuel type: ")
-    x.speed = int(input("Enter vehicle speed: "))
-    Garage.append(x)
-    print(f"{x.name} has been added to the garage.")
+    try:
+        x.name = input("Enter vehicle name: ")
+        x.max_fuel = int(input("Enter vehicle fuel capacity (Liter): "))
+        x.fuel = x.max_fuel
+        x.fuel_type = input("Enter vehicle fuel type (Gasoline, Diesel, Electric): ")
+        x.speed = int(input("Enter vehicle speed (km/h): "))
+        Garage.append(x)
+        print(f"{x.name} has been added to the garage.")
+    except ValueError:
+        print("Invalid input, please enter numeric values for fuel and speed.")
 
 def view_garage():
     global CurrentVehicle
@@ -170,9 +177,6 @@ def view_garage():
 
 def drive_sim():
     global CurrentVehicle
-    if CurrentVehicle is None:
-        print("No vehicle selected.")
-        return
     while True:
         print(f"Current vehicle: {CurrentVehicle.name}")
         print(f"Fuel: {CurrentVehicle.fuel}L/{CurrentVehicle.max_fuel}L, Speed: {CurrentVehicle.speed}km/h")
@@ -224,6 +228,7 @@ if __name__ == "__main__":
         elif choice == "2":
             view_garage()
         elif choice == "3":
+            CurrentVehicle.start_engine()
             drive_sim()
         elif choice == "4":
             print("Exiting program.")
