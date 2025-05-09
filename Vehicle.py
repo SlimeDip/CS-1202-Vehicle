@@ -75,8 +75,8 @@ class Vehicle(ABC):
 
     # add nalang kayo ng mga methods na gusto nyo
 
-# itong Car na ito ay example lang
 class Car(Vehicle):
+
     def start_engine(self):
         print("Car engine started")
 
@@ -154,13 +154,11 @@ def create_vehicle():
 
 def view_garage():
     global CurrentVehicle
-    if not Garage:
-        print("Garage is empty.")
-        return
     
     for j, i in enumerate(Garage):
         print("-" * 20)
         print(f"{j+1}. {i.name}")
+        print(f"Vehicle type: {type(i).__name__}")
         print(f"Vehicle fuel: {i.fuel}L, Fuel type: {i.fuel_type}, Speed: {i.speed}km/h")
     print("-" * 20)
 
