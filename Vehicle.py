@@ -36,7 +36,7 @@ class Vehicle(ABC):
     
     @fuel.setter
     def fuel(self, value):
-        if value <= 0:
+        if value < 0:
             self._fuel = 60
             print("Fuel cannot be negative, setting to default value of 60L.")
         else:
@@ -235,7 +235,8 @@ def create_vehicle():
     
     try:
         x.name = input("Enter vehicle name: ")
-        x.max_fuel = int(input("Enter vehicle fuel capacity (Liter): "))
+        max_fuel = int(input("Enter vehicle fuel capacity (Liter): "))
+        x.max_fuel = max_fuel if max_fuel > 0 else -1
         x.fuel = x.max_fuel
         x.fuel_type = input("Enter vehicle fuel type (Gasoline, Diesel, Electric): ")
         if isinstance(x, LandVehicle):
@@ -328,13 +329,12 @@ def drive_sim():
                     time.sleep(1)
                     clear()
                     continue
-                distance_in_km = distance_in_knots / 0.539957
-                if distance_in_km > CurrentVehicle.fuel:
+                if distance_in_knots > CurrentVehicle.fuel:
                     print("Not enough fuel to drive this distance.")
                     time.sleep(1)
                     clear()
                     continue
-                CurrentVehicle.fuel -= distance_in_km
+                CurrentVehicle.fuel -= distance_in_knots
                 CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
                 print(f"Driving {distance_in_knots:.2f} nautical miles")
                 print("Driving", end=" ", flush=True)
