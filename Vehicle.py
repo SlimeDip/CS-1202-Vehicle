@@ -304,7 +304,7 @@ def drive_sim(CurrentVehicle):
     while True:
         unit = "kn" if CurrentVehicle._terrain == "water" else "km/h"
         print(f"Current vehicle: {CurrentVehicle.name}")
-        print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {CurrentVehicle.speed:.2f} {unit}\n")
+        print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L | Speed: {CurrentVehicle.speed:.2f} {unit}\n")
         print("Select an action:")
         print("1. Drive")
         print("2. Refuel")
