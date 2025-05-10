@@ -1,4 +1,8 @@
-# 🚗 Vehicle OOP Project 🚙
+# 🚗 Ultimate Vehicle Simulator 🛥️
+
+**Ultimate Vehicle Simulator** is a simple program designed to showcase the fundamentals of Object-Oriented Programming (OOP) in Python. It serves as both a vehicle maker and simulator, allowing users to create, manage, and interact with various types of vehicles in a virtual environment.
+
+---
 
 ## 👥 Team Members:
 - **Borillo, Benedict P.**
@@ -23,13 +27,14 @@ This program demonstrates the use of **Object-Oriented Programming (OOP)** conce
 - ⛽ **Refuel your vehicle**  
   Refill your vehicle's fuel tank when it runs out, so you can continue driving.
 
-This program uses an abstract base class (`Vehicle`) and subclasses (`Car`, `Motorcycle`, `Bus`, `Truck`) to demonstrate key OOP principles such as:
+This program uses an abstract base class (`Vehicle`) and subclasses (`Car`, `Motorcycle`, `Bus`, `Truck`,`Speedboat`, `Jetski`) to demonstrate key OOP principles such as:
 - **Inheritance**: Sharing common functionality across different types of vehicles.
 - **Abstraction**: Defining a blueprint for vehicles with abstract methods.
 - **Polymorphism**: Allowing different vehicle types to implement their own behavior for shared methods.
 
-**Class Diagram**
+## Class Diagram
 ![Class Diagram](Class%20Diagram.png)
+
 ---
 
 ## ▶️ How to run the program?
@@ -38,8 +43,9 @@ This program uses an abstract base class (`Vehicle`) and subclasses (`Car`, `Mot
 3. Run the `Vehicle.py` script:
    ```bash
    python Vehicle.py
+Note: This program might not work on online compilers.
 
 ---
 
-## Acknowledgement
-We would like to thank god and our adviser for making this project possible.
+## 🏆 Acknowledgement
+We’d like to thank God for guiding us along the way, our adviser for all the support, and everyone who contributed and helped make this project happen.
