@@ -251,7 +251,6 @@ def create_vehicle():
     except ValueError:
         print("Invalid input, please enter numeric values for fuel and speed.")
         time.sleep(1)
-        clear()
 
 def view_garage():
     global CurrentVehicle
@@ -276,7 +275,6 @@ def view_garage():
     except ValueError:
         print("Invalid input, please enter a number.")
         time.sleep(1)
-        clear()
 
 def view_dock():
     global CurrentVehicle
@@ -301,10 +299,8 @@ def view_dock():
     except ValueError:
         print("Invalid input, please enter a number.")
         time.sleep(1)
-        clear()
 
-def drive_sim():
-    global CurrentVehicle
+def drive_sim(CurrentVehicle):
     while True:
         if isinstance(CurrentVehicle, WaterVehicle):
             speed_in_knots = round(CurrentVehicle.speed, 2)
@@ -366,7 +362,6 @@ def drive_sim():
                 print(f"\nYou traveled {distance:.2f} km in {distance / round(CurrentVehicle.speed, 2):.2f} hours.")
                 print(f"\nArrived at destination!")
             time.sleep(3)
-            clear()
         elif choice == "2":
             clear()
             print("Refueling", end=" ", flush=True)
@@ -377,17 +372,15 @@ def drive_sim():
             CurrentVehicle.refuel()
             CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
             time.sleep(1)
-            clear()
         elif choice == "3":
             clear()
             CurrentVehicle.stop_engine()
             time.sleep(1)
-            clear()
             break
         else:
             print("Invalid choice, please try again.")
             time.sleep(1)
-            clear()
+        clear()
 
 clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -460,15 +453,12 @@ if __name__ == "__main__":
             clear()
             create_vehicle()
             time.sleep(1)
-            clear()
         elif choice == "2":
             clear()
             view_garage()
-            clear()
         elif choice == "3":
             clear()
             view_dock()
-            clear()
         elif choice == "4":
             clear()
             print("Starting engine", end=" ", flush=True)
@@ -480,12 +470,11 @@ if __name__ == "__main__":
             print()
             time.sleep(1)
             clear()
-            drive_sim()
-            clear()
+            drive_sim(CurrentVehicle)
         elif choice == "5":
             print("Exiting program.")
             break
         else:
             print("Invalid choice, please try again.")
             time.sleep(1)
-            clear()
+        clear()
