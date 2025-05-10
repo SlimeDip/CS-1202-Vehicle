@@ -337,7 +337,6 @@ def drive_sim(CurrentVehicle):
             print(f"\nYou traveled {distance} {label} in {distance / round(CurrentVehicle.speed, 2):.2f} hours.")
             print(f"\nArrived at destination!")
             time.sleep(3)
-
         elif choice == "2":
             clear()
             print("Refueling", end=" ", flush=True)
@@ -348,7 +347,6 @@ def drive_sim(CurrentVehicle):
             CurrentVehicle.refuel()
             CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
             time.sleep(1)
-
         elif choice == "3":
             clear()
             CurrentVehicle.stop_engine()
