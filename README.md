@@ -48,4 +48,4 @@ Note: This program might not work on online compilers.
 ---
 
 ## 🏆 Acknowledgement
-We’d like to thank God for guiding us along the way, our adviser for all the support, and everyone who contributed and helped make this project happen.
+We’d like to thank God for guiding us along the way, to our instructor, Mr. John Richard Esguerrar, for his support and guidance, and everyone who contributed and helped make this project happen.
