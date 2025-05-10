@@ -112,14 +112,14 @@ class Car(LandVehicle):
         print("Car engine stopped")
 
     def drive(self, amount):
-        if self._fuel <= 0:
+        if self.fuel <= 0:
             print("Cannot drive, fuel is empty")
             return
-        self._fuel -= amount
+        self.fuel -= amount
 
     def refuel(self):
-        self._fuel = self.max_fuel
-        print(f"Car refueled: {self._fuel}L / {self.max_fuel}L")
+        self.fuel = self.max_fuel
+        print(f"Car refueled: {self.fuel}L / {self.max_fuel}L")
 
 class Motorcycle(LandVehicle):
     def start_engine(self):
@@ -129,14 +129,14 @@ class Motorcycle(LandVehicle):
         print("Motorcycle engine stopped")
 
     def drive(self, amount):
-        if self._fuel <= 0:
+        if self.fuel <= 0:
             print("Cannot drive, fuel is empty")
             return
-        self._fuel -= amount
+        self.fuel -= amount
 
     def refuel(self):
-        self._fuel = self.max_fuel
-        print(f"Motorcycle refueled: {self._fuel}L / {self.max_fuel}L")
+        self.fuel = self.max_fuel
+        print(f"Motorcycle refueled: {self.fuel}L / {self.max_fuel}L")
 
 class Bus(LandVehicle):
     def start_engine(self):
@@ -146,14 +146,14 @@ class Bus(LandVehicle):
         print("Bus engine stopped")
 
     def drive(self, amount):
-        if self._fuel <= 0:
+        if self.fuel <= 0:
             print("Cannot drive, fuel is empty")
             return
-        self._fuel -= amount
+        self.fuel -= amount
 
     def refuel(self):
-        self._fuel = self.max_fuel
-        print(f"Bus refueled: {self._fuel}L / {self.max_fuel}L")
+        self.fuel = self.max_fuel
+        print(f"Bus refueled: {self.fuel}L / {self.max_fuel}L")
 
 class Truck(LandVehicle):
     def start_engine(self):
@@ -163,14 +163,14 @@ class Truck(LandVehicle):
         print("Truck engine stopped")
 
     def drive(self, amount):
-        if self._fuel <= 0:
+        if self.fuel <= 0:
             print("Cannot drive, fuel is empty")
             return
-        self._fuel -= amount
+        self.fuel -= amount
 
     def refuel(self):
-        self._fuel = self.max_fuel
-        print(f"Truck refueled: {self._fuel}L / {self.max_fuel}L")
+        self.fuel = self.max_fuel
+        print(f"Truck refueled: {self.fuel}L / {self.max_fuel}L")
 
 class Speedboat(WaterVehicle):
     def start_engine(self):
@@ -180,14 +180,14 @@ class Speedboat(WaterVehicle):
         print("Speedboat engine stopped")
 
     def drive(self, amount):
-        if self._fuel <= 0:
+        if self.fuel <= 0:
             print("Cannot drive, fuel is empty")
             return
-        self._fuel -= amount
+        self.fuel -= amount
 
     def refuel(self):
-        self._fuel = self.max_fuel
-        print(f"Speedboat refueled: {self._fuel}L / {self._max_fuel}L")
+        self.fuel = self.max_fuel
+        print(f"Speedboat refueled: {self.fuel}L / {self.max_fuel}L")
 
 class Jetski(WaterVehicle):
     def start_engine(self):
@@ -197,14 +197,14 @@ class Jetski(WaterVehicle):
         print("Jetski engine stopped")
 
     def drive(self, amount):
-        if self._fuel <= 0:
+        if self.fuel <= 0:
             print("Cannot drive, fuel is empty")
             return
-        self._fuel -= amount
+        self.fuel -= amount
 
     def refuel(self):
-        self._fuel = self.max_fuel
-        print(f"Jetski refueled: {self._fuel}L / {self._maxfuel}L")
+        self.fuel = self.max_fuel
+        print(f"Jetski refueled: {self.fuel}L / {self.max_fuel}L")
 
 def create_vehicle():
     print("Select vehicle type:")
@@ -302,66 +302,42 @@ def view_dock():
 
 def drive_sim(CurrentVehicle):
     while True:
-        if isinstance(CurrentVehicle, WaterVehicle):
-            speed_in_knots = round(CurrentVehicle.speed, 2)
-            print(f"Current vehicle: {CurrentVehicle.name}")
-            print(f"Fuel: {round(CurrentVehicle._fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {speed_in_knots:.2f} kn\n")
-        else:
-            print(f"Current vehicle: {CurrentVehicle.name}")
-            print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {round(CurrentVehicle.speed, 2)} km/h\n")
-
+        unit = "kn" if CurrentVehicle._terrain == "water" else "km/h"
+        print(f"Current vehicle: {CurrentVehicle.name}")
+        print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L, Speed: {CurrentVehicle.speed:.2f} {unit}\n")
         print("Select an action:")
         print("1. Drive")
         print("2. Refuel")
         print("3. Stop Engine")
         choice = input("Enter your choice: ")
-        print()
         
         if choice == "1":
+            label = "nautical miles" if CurrentVehicle._terrain == "water" else "km"
             clear()
-            if isinstance(CurrentVehicle, WaterVehicle):
-                distance_in_knots = float(input("Enter distance to drive (in nautical miles): "))
-                if distance_in_knots <= 0:
-                    print("Distance must be greater than 0.")
-                    time.sleep(1)
-                    clear()
-                    continue
-                if distance_in_knots > CurrentVehicle.fuel:
-                    print("Not enough fuel to drive this distance.")
-                    time.sleep(1)
-                    clear()
-                    continue
-                CurrentVehicle.fuel -= distance_in_knots
-                CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
-                print(f"Driving {distance_in_knots:.2f} nautical miles")
-                print("Driving", end=" ", flush=True)
-                for _ in range(3):
-                    print(".", end=" ", flush=True)
-                    time.sleep(1)
-                print(f"\nYou traveled {distance_in_knots:.2f} nautical miles in {distance_in_knots / round(CurrentVehicle.speed, 2):.2f} hours.")
-                print(f"\nArrived at destination!")
-            elif isinstance(CurrentVehicle, LandVehicle):
-                distance = float(input("Enter distance to drive (in km): "))
-                if distance <= 0:
-                    print("Distance must be greater than 0.")
-                    time.sleep(1)
-                    clear()
-                    continue
-                if distance > CurrentVehicle.fuel:
-                    print("Not enough fuel to drive this distance.")
-                    time.sleep(1)
-                    clear()
-                    continue
-                CurrentVehicle.fuel -= distance
-                CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
-                print(f"Driving {distance:.2f} km")
-                print("Driving", end=" ", flush=True)
-                for _ in range(3):
-                    print(".", end=" ", flush=True)
-                    time.sleep(1)
-                print(f"\nYou traveled {distance:.2f} km in {distance / round(CurrentVehicle.speed, 2):.2f} hours.")
-                print(f"\nArrived at destination!")
+
+            distance = float(input(f"Enter distance to drive (in {label}): "))
+            if distance <= 0:
+                print("Distance must be greater than 0.")
+                time.sleep(1)
+                clear()
+                continue
+            if distance > CurrentVehicle.fuel:
+                print("Not enough fuel to drive this distance.")
+                time.sleep(1)
+                clear()
+                continue
+
+            CurrentVehicle.fuel -= distance
+
+            print(f"Driving {distance} {label}")
+            print("Driving", end=" ", flush=True)
+            for _ in range(3):
+                print(".", end=" ", flush=True)
+                time.sleep(1)
+            print(f"\nYou traveled {distance} {label} in {distance / round(CurrentVehicle.speed, 2):.2f} hours.")
+            print(f"\nArrived at destination!")
             time.sleep(3)
+
         elif choice == "2":
             clear()
             print("Refueling", end=" ", flush=True)
@@ -372,6 +348,7 @@ def drive_sim(CurrentVehicle):
             CurrentVehicle.refuel()
             CurrentVehicle.fuel = round(CurrentVehicle.fuel, 2)
             time.sleep(1)
+
         elif choice == "3":
             clear()
             CurrentVehicle.stop_engine()
