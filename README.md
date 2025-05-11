@@ -1,6 +1,6 @@
 # 🚗 Ultimate Vehicle Simulator 🛥️
 
-**Ultimate Vehicle Simulator** is a simple program designed to showcase the fundamentals of Object-Oriented Programming (OOP) in Python. It serves as both a vehicle maker and simulator, allowing users to create, manage, and interact with various types of vehicles in a virtual environment.
+**Ultimate Vehicle Simulator** by **Group 1 from CS-1202** is a simple program designed to showcase the fundamentals of Object-Oriented Programming (OOP) in Python. It serves as both a vehicle maker and simulator, allowing users to create, manage, and interact with various types of vehicles in a virtual environment.
 
 ---
 
@@ -48,4 +48,4 @@ Note: This program might not work on online compilers.
 ---
 
 ## 🏆 Acknowledgement
-We’d like to thank God for guiding us along the way, to our instructor, Mr. John Richard Esguerrar, for his support and guidance, and everyone who contributed and helped make this project happen.
+We extend our sincere gratitude to our instructor, Mr. John Richard Esguerrar, for his invaluable guidance and support throughout this project. We also thank everyone who contributed and assisted in making this project a success.
