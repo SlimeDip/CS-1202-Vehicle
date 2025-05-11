@@ -265,7 +265,7 @@ def view_garage():
     print("-" * 20)
 
     try:
-        choice = int(input("\nSelect vehicle to drive (1, 2, ...): "))
+        choice = int(input("\nSelect vehicle to drive: "))
         if choice < 1 or choice > len(Garage):
             print("Invalid choice.")
             time.sleep(1)
@@ -289,7 +289,7 @@ def view_dock():
     print("-" * 20)
 
     try:
-        choice = int(input("\nSelect vehicle to drive (1, 2, ...): "))
+        choice = int(input("\nSelect vehicle to drive: "))
         if choice < 1 or choice > len(Dock):
             print("Invalid choice.")
             time.sleep(1)
