@@ -417,12 +417,11 @@ if __name__ == "__main__":
     while True:
         print(f"Current vehicle: {CurrentVehicle.name}\n")
         print("Select an option:")
-        print("1. Car")
-        print("2. Motorcycle")
-        print("3. Bus")
-        print("4. Truck")
-        print("5. Speedboat")
-        print("6. Jetski")
+        print("1. Create Vehicle")
+        print("2. View Garage")
+        print("3. View Dock")
+        print("4. Drive Vehicle")
+        print("5. Exit")
         choice = input("Enter your choice: ")
         
         if choice == "1":
