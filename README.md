@@ -18,11 +18,11 @@ This program demonstrates the use of **Object-Oriented Programming (OOP)** conce
 - 🔧 **Create your own vehicle**  
   Design a vehicle by specifying its name, speed, and fuel type. Choose from different types of vehicles.
 
-- 🧰 **Manage a garage**  
-  View and manage a collection of vehicles you have created. Select a vehicle to drive.
+- 🧰 **Manage your vehicles**  
+  View and manage a collection of vehicles you have created. View your garage or dock to select a vehicle to drive.
 
 - 🚦 **Drive your vehicle**  
-  Simulate driving your vehicle while keeping track of fuel consumption. Ensure you have enough fuel before driving!
+  Simulate driving your vehicle while keeping track of fuel consumption. Make sure that you have enough fuel before driving.
 
 - ⛽ **Refuel your vehicle**  
   Refill your vehicle's fuel tank when it runs out, so you can continue driving.
@@ -48,4 +48,4 @@ Note: This program might not work on online compilers.
 ---
 
 ## 🏆 Acknowledgement
-We extend our sincere gratitude to our instructor, Mr. John Richard Esguerrar, for his invaluable guidance and support throughout this project. We also thank everyone who contributed and assisted in making this project a success.
+We extend our sincere gratitude to our instructor, Asst. Prof. John Richard Esguerra, for his invaluable guidance and support throughout this project. We also thank everyone who contributed and assisted in making this project possible.
