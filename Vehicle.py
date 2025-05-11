@@ -208,12 +208,12 @@ class Jetski(WaterVehicle):
 
 def create_vehicle():
     print("Select vehicle type:")
-    print("1. Car")
-    print("2. Motorcycle")
-    print("3. Bus")
-    print("4. Truck")
-    print("5. Speedboat")
-    print("6. Jetski")
+    print("[1] Car")
+    print("[2] Motorcycle")
+    print("[3] Bus")
+    print("[4] Truck")
+    print("[5] Speedboat")
+    print("[6] Jetski")
     vehicle_type = input("Enter your choice: ")
 
     if vehicle_type == "1":
@@ -306,9 +306,9 @@ def drive_sim(CurrentVehicle):
         print(f"Current vehicle: {CurrentVehicle.name}")
         print(f"Fuel: {round(CurrentVehicle.fuel, 2)}L / {round(CurrentVehicle.max_fuel, 2)}L | Speed: {CurrentVehicle.speed:.2f} {unit}\n")
         print("Select an action:")
-        print("1. Drive")
-        print("2. Refuel")
-        print("3. Stop Engine")
+        print("[1] Drive")
+        print("[2] Refuel")
+        print("[3] Stop Engine")
         choice = input("Enter your choice: ")
         
         if choice == "1":
@@ -417,11 +417,11 @@ if __name__ == "__main__":
     while True:
         print(f"Current vehicle: {CurrentVehicle.name}\n")
         print("Select an option:")
-        print("1. Create Vehicle")
-        print("2. View Garage")
-        print("3. View Dock")
-        print("4. Drive Vehicle")
-        print("5. Exit")
+        print("[1] Create Vehicle")
+        print("[2] View Garage")
+        print("[3] View Dock")
+        print("[4] Drive Vehicle")
+        print("[5] Exit")
         choice = input("Enter your choice: ")
         
         if choice == "1":
